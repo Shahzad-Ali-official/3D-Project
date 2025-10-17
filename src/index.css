@@ -13,3 +13,8 @@ background-color: black;
 color: white;
 
 }
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+}

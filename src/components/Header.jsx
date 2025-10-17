@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-//import { a } from "framer-motion/client";
+import { motion , AnimatePresence} from "framer-motion";
 import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX  } from "react-icons/fi";
 import { useState } from "react";
 
@@ -38,9 +37,10 @@ const closeContactForm = () => {
           }}
           className="flex items-center">
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-gray-500 to-gray-100 flex items-center justify-center text-purple-600 font-bold text-2xl mr-3 " >
-                S</div>
+                S
+                </div>
                   <span className="text-xl font-bold bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent">
-                    Shahzad
+                    Shahzad Ali
                   </span>
 
 
@@ -127,7 +127,7 @@ const closeContactForm = () => {
           transition={{ duration: 0.5 }}
           className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-4"
         >
-          <nav className="flex flex-col items-center space-y-3 py-8">
+          <nav className="flex flex-col items-center space-y-3 py-6">
             {["Home", "About", "Projects", "Experience", "Contact"].map((item) => (
               <a key={item} href="#" onClick={toggleMenu} className="text-gray-300 hover:text-violet-400 text-lg font-medium py-1.5">
                 {item}
@@ -135,7 +135,7 @@ const closeContactForm = () => {
             ))}
             </nav>
             {/* Social Icons Mobile */}
-            <div className="pt-4 border-t border-gray-200 dark:border-gray-700 flex flex-col items-center">
+            <div className="pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col items-center">
               <div className="flex space-x-6">
 
               <a className="text-gray-300 hover:text-violet-400" href="#">
@@ -152,23 +152,36 @@ const closeContactForm = () => {
             <button
             onClick={() => {
               toggleMenu();
+              openContactForm();
             }}
-            className="mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-gray-400 to-gray-100 text-violet-700 font-bold hover:from-violet-700 hover:to-purple-700 hover:text-white transition-all duration-500">
+            className="mt-5 px-6 py-2 rounded-lg text-lg bg-gradient-to-r from-gray-400 to-gray-100 text-violet-700 font-bold hover:from-violet-700 hover:to-purple-700 hover:text-white transition-all duration-500">
               Hire Me
             </button>
           </div>
         </motion.div>
       )}
+    <AnimatePresence>
+
      { contactForm && (
-    <motion.div
-    initial={{ opacity:0}}
-    animate={{ opacity:1}}
-    exit={{opacity:0}}
-    transition={{ duration: 0.5 }}
-     className="fixed inset-0 bg-black/50 background-blur-sm flex items-center justify-center z-50 p-4"
-    
-    > 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md p-6">
+       <motion.div
+       initial={{ opacity:0}}
+       animate={{ opacity:1}}
+       exit={{opacity:0}}
+       transition={{ duration: 0.5 }}
+       className="fixed inset-0 bg-black/50 background-blur-sm flex items-center justify-center z-50 p-4"
+       
+       > 
+      <motion.div 
+      initial={{ scale: 0.8, opacity: 0, y:30}}
+      animate={{ scale: 1, opacity: 1, y:0}}
+      exit={{ scale: 0.8, opacity: 0, y:30}}
+      transition={{
+        type: "spring",
+        damping:30,
+        stiffness:200,
+          duration: 0.8
+      }}
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md p-6">
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-bold text-gray-300 ">
               Get In Touch
@@ -193,19 +206,26 @@ const closeContactForm = () => {
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1 ">Message</label>
-                <textarea rows={4} id="message" placeholder="Enter Your Message" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
+                <textarea rows={4} id="message" placeholder="How can i help you?" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
 
               </div>
+              <motion.button
+              type="submit"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              
+              className="w-full px-4 py-2 bg-gradient-to-r from-violet-600 to-violet-400 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-md hover:shadow-lg  hover: shadow-violet-600/50 ">
+                 Send Message
+              </motion.button>
 
           </form>
 
 
-      </div>
-
-
-     </motion.div>
+         </motion.div>
+        </motion.div>
     
-    )}
+        )}
+    </AnimatePresence>
 
 
     </header>
