@@ -13,6 +13,56 @@ background-color: black;
 color: white;
 
 }
+
+/* Section styling */
+section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+
+.panel {
+  width: 100%;
+  height: 100vh;
+}
+
+.pin-spacer {
+  height: 200vh;
+}
+
+/* Responsive text sizing */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  p {
+    font-size: 1rem !important;
+  }
+
+  .panel-title {
+    font-size: 2rem !important;
+  }
+
+  .panel-desc {
+    font-size: 1rem !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border ;
+  }
+  body {
+    @apply bg-background text-foreground ;
+  }
+}
 @layer base {
   html {
     @apply scroll-smooth;
