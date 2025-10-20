@@ -1,13 +1,36 @@
 import { motion , AnimatePresence} from "framer-motion";
 import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX  } from "react-icons/fi";
-import { useState,} from "react";
+import { useState } from "react";
 
 const Header = ({ openContactForm, contactForm, closeContactForm }) => {
 //Toggle menu
 const [isOpen, setIsOpen] = useState(false);
 const toggleMenu = () => {
   setIsOpen(!isOpen);
-}
+};
+
+// Form state
+const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  message: "",
+});
+
+const handleChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const form = e.target;
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(new FormData(form)).toString(),
+  })
+    .then(() => closeContactForm())
+    .catch((error) => alert(error));
+};
 
 
 
@@ -209,21 +232,21 @@ const toggleMenu = () => {
 
           </div>
           {/* Form */}
-          <form name="contact" method="POST" data-netlify="true" className="space-y-4 ">
+          <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-4 ">
               <input type="hidden" name="form-name" value="contact" />
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1 ">Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter Your Name" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
+                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter Your Name" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700" required/>
 
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1 ">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter Your Email" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter Your Email" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700" required/>
 
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1 ">Message</label>
-                <textarea rows={4} id="message" name="message" placeholder="How can i help you?" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
+                <textarea rows={4} id="message" name="message" value={formData.message} onChange={handleChange} placeholder="How can i help you?" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700" required/>
 
               </div>
               <motion.button
