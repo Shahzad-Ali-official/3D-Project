@@ -23,10 +23,12 @@ const handleChange = (e) => {
 const handleSubmit = (e) => {
   e.preventDefault();
   const form = e.target;
+  const formData = new FormData(form);
+
   fetch("/", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(new FormData(form)).toString(),
+    body: new URLSearchParams(formData).toString(),
   })
     .then(() => closeContactForm())
     .catch((error) => alert(error));
