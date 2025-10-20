@@ -1,22 +1,14 @@
 import { motion , AnimatePresence} from "framer-motion";
 import { FiGithub, FiLinkedin, FiTwitter, FiMenu, FiX  } from "react-icons/fi";
-import { useState } from "react";
+import { useState,} from "react";
 
-const Header = () => {
+const Header = ({ openContactForm, contactForm, closeContactForm }) => {
 //Toggle menu
 const [isOpen, setIsOpen] = useState(false);
 const toggleMenu = () => {
   setIsOpen(!isOpen);
 }
-//Statefor contact form
-const [contactForm, setContactForm] = useState(false);
 
-const openContactForm = () => {
-  setContactForm(true);
-}
-const closeContactForm = () => {
-  setContactForm(false);
-}
 
 
   return (
@@ -47,7 +39,7 @@ const closeContactForm = () => {
           </motion.div>
           {/* Desktop Nav */}
           <nav  className="lg:flex hidden space-x-8 ">
-            {["Home","About","Projects","Experience","Contact",].map((item, index) => (
+            {["Home","About","Projects","Experience"].map((item, index) => (
               <motion.a key={item} 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,13 +51,28 @@ const closeContactForm = () => {
                 //duration: 1.2,
               }}
                className="relative text-gray-800 dark:text-gray-200 hover:violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
-                href="#">
+                href={`#${item.toLowerCase()}`}>
                   {item}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300">
 
                   </span>
                 </motion.a>
             ))}
+            <motion.a key="Contact"
+              onClick={openContactForm}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type:"spring",
+                stiffness: 100,
+                damping: 20,
+                delay: 0.7 + 4 * 0.2,
+              }}
+              className="relative text-gray-800 dark:text-gray-200 hover:violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group cursor-pointer"
+            >
+              Contact
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300"></span>
+            </motion.a>
 
           </nav>
 
@@ -75,7 +82,7 @@ const closeContactForm = () => {
                initial={{ opacity: 0, scale: 0.5 }}
                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.3, duration: 0.8}}
-               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" href="#">
+               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" href="https://github.com/Shahzad-Ali-official" target="_blank" rel="noopener noreferrer">
                 <FiGithub className=" w-5 h-5 "/>
 
                </motion.a>
@@ -83,7 +90,7 @@ const closeContactForm = () => {
                initial={{ opacity: 0, scale: 0.5 }}
                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.3, duration: 0.8}}
-               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" href="#">
+               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" href="https://www.linkedin.com/in/shahzadali3395/" target="_blank" rel="noopener noreferrer">
                 <FiLinkedin className=" w-5 h-5 "/>
 
                </motion.a>
@@ -91,7 +98,7 @@ const closeContactForm = () => {
                initial={{ opacity: 0, scale: 0.5 }}
                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.3, duration: 0.8}}
-               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" href="#">
+               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300" href="#" target="_blank" rel="noopener noreferrer">
                 <FiTwitter className=" w-5 h-5 "/>
 
                </motion.a>
@@ -128,23 +135,32 @@ const closeContactForm = () => {
           className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-4"
         >
           <nav className="flex flex-col items-center space-y-3 py-6">
-            {["Home", "About", "Projects", "Experience", "Contact"].map((item) => (
-              <a key={item} href="#" onClick={toggleMenu} className="text-gray-300 hover:text-violet-400 text-lg font-medium py-1.5">
+            {["Home", "About", "Projects", "Experience"].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} onClick={toggleMenu} className="text-gray-300 hover:text-violet-400 text-lg font-medium py-1.5">
                 {item}
               </a>
             ))}
+            <a
+              key="Contact"
+              onClick={() => {
+                toggleMenu();
+                openContactForm();
+              }}
+              className="text-gray-300 hover:text-violet-400 text-lg font-medium py-1.5 cursor-pointer">
+              Contact
+            </a>
             </nav>
             {/* Social Icons Mobile */}
             <div className="pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-col items-center">
               <div className="flex space-x-6">
 
-              <a className="text-gray-300 hover:text-violet-400" href="#">
+              <a className="text-gray-300 hover:text-violet-400" href="https://github.com/Shahzad-Ali-official" target="_blank" rel="noopener noreferrer">
                 <FiGithub className="w-6 h-6" />
               </a>
-              <a className="text-gray-300 hover:text-violet-400" href="#">
+              <a className="text-gray-300 hover:text-violet-400" href="https://www.linkedin.com/in/shahzadali3395/" target="_blank" rel="noopener noreferrer">
                 <FiLinkedin className="w-6 h-6" />
               </a>
-              <a className="text-gray-300 hover:text-violet-400" href="#">
+              <a className="text-gray-300 hover:text-violet-400" href="#" target="_blank" rel="noopener noreferrer">
                 <FiTwitter className="w-6 h-6" />
               </a>
             </div>
@@ -193,20 +209,21 @@ const closeContactForm = () => {
 
           </div>
           {/* Form */}
-          <form className="space-y-4 ">
+          <form name="contact" method="POST" data-netlify="true" className="space-y-4 ">
+              <input type="hidden" name="form-name" value="contact" />
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1 ">Name</label>
-                <input type="text" id="name" placeholder="Enter Your Name" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
+                <input type="text" id="name" name="name" placeholder="Enter Your Name" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
 
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1 ">Email</label>
-                <input type="email" id="email" placeholder="Enter Your Email" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
+                <input type="email" id="email" name="email" placeholder="Enter Your Email" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
 
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1 ">Message</label>
-                <textarea rows={4} id="message" placeholder="How can i help you?" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
+                <textarea rows={4} id="message" name="message" placeholder="How can i help you?" className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700"/>
 
               </div>
               <motion.button

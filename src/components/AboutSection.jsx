@@ -68,6 +68,7 @@ const AboutSection = () => {
   return (
    <section
   ref={sectionRef}
+  id="about"
   className="min-h-screen bg-gradient-to-b from-black to-[#9a74cf50] flex flex-col justify-center relative overflow-visible"
 >
 

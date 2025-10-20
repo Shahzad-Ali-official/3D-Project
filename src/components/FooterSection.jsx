@@ -14,13 +14,13 @@ const FooterSection = () => {
                        Connect
                     </h3>
                     <div className="flex space-x-4">
-                        <a className="text-gray-700 hover:text-violet-400 trasition-colors "href="#">
+                        <a className="text-gray-300 hover:text-violet-400 transition-colors" href="https://github.com/Shahzad-Ali-official" target="_blank" rel="noopener noreferrer">
                             <FiGithub className="w-6 h-6"/>
                         </a>
-                        <a className="text-gray-700 hover:text-violet-400 trasition-colors "href="#">
+                        <a className="text-gray-300 hover:text-violet-400 transition-colors" href="#" target="_blank" rel="noopener noreferrer">
                             <FiTwitter className="w-6 h-6"/>
                         </a>
-                        <a className="text-gray-700 hover:text-violet-400 trasition-colors " href="#">
+                        <a className="text-gray-300 hover:text-violet-400 transition-colors" href="https://www.linkedin.com/in/shahzadali3395/" target="_blank" rel="noopener noreferrer">
                             <FiLinkedin className="w-6 h-6"/>
                         </a>
                      </div>   
@@ -31,8 +31,8 @@ const FooterSection = () => {
                        <p className="text-gray-500 text-sm "> 
                         © 2025 - Shahzad Ali - All rights reserved.
                         </p> 
-                      <div className="felx space-x-6 mt-4 md:mt-0 ">
-                         <a className="text-gray-500 hover:text-white text-sm trasition-colors " href="#">
+                      <div className="flex space-x-6 mt-4 md:mt-0 ">
+                         <a className="text-gray-500 hover:text-white text-sm transition-colors " href="#" target="_blank" rel="noopener noreferrer">
                             Privacy Policy
                          
                          </a>

@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const ContactSection = () => {
+const ContactSection = ({ openContactForm }) => {
   const circleRef = useRef(null);
   const sectionRef = useRef(null);
   const initialTextRef = useRef(null);
@@ -125,7 +125,9 @@ const ContactSection = () => {
             stands out.
           </p>
 
-          <button className="px-10 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 scale-[0.1] absolute sm:mt-6 mt-5 whitespace-nowrap">
+          <button
+            onClick={openContactForm}
+            className="px-10 py-2 rounded-xl bg-black text-white hover:bg-white hover:text-black transition-all duration-500 scale-[0.1] absolute sm:mt-6 mt-5 whitespace-nowrap cursor-pointer">
             Hire Me
           </button>
         </div>
